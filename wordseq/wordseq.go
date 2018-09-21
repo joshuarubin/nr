@@ -6,6 +6,7 @@ package wordseq
 import (
 	"container/heap"
 	"crypto/sha1"
+	"fmt"
 	"io"
 	"strings"
 	"unicode"
@@ -30,8 +31,19 @@ func (h seqHeap) Len() int {
 }
 
 func (h seqHeap) Less(i, j int) bool {
-	// TODO(jrubin) what if the counts are equal?
-	return h[i].Count > h[j].Count
+	// first sort on count Max to Min
+	if h[i].Count != h[j].Count {
+		return h[i].Count > h[j].Count
+	}
+
+	// next sort on words lexicographically
+	for k := range h[i].Words {
+		if h[i].Words[k] != h[j].Words[k] {
+			return h[i].Words[k] < h[j].Words[k]
+		}
+	}
+
+	return false
 }
 
 func (h seqHeap) Swap(i, j int) {
@@ -63,6 +75,10 @@ func isSpace(s string) bool {
 }
 
 func Process(n io.Reader, seqSize, topN int) ([]*Sequence, error) {
+	if seqSize < 1 || topN < 1 {
+		return nil, fmt.Errorf("invalid argument")
+	}
+
 	wr := wordreader.New(n)
 
 	window := make([]string, 0, seqSize+1)

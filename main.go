@@ -28,11 +28,31 @@ type config struct {
 func initFlags(c *config) *flag.FlagSet {
 	fs := flag.NewFlagSet(os.Args[0], flag.ExitOnError)
 
+	fs.Usage = func() {
+		_, _ = fmt.Fprintf(
+			fs.Output(),
+			`Usage of %s:
+
+	%s file1.txt file2.txt ...
+	cat file1.txt | %s
+
+	A filename argument of '-' indicates that stdin should be read.
+	If no filenames are given, input is assumed to come from stdin.
+
+flags:
+`,
+			os.Args[0],
+			os.Args[0],
+			os.Args[0],
+		)
+		fs.PrintDefaults()
+	}
+
 	fs.StringVar(
 		&c.Encoding,
 		"encoding",
 		"",
-		"file encoding of all files, including stdin",
+		"file encoding of all files, including stdin, valid values defined at https://www.w3.org/TR/encoding/",
 	)
 
 	fs.IntVar(
