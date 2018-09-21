@@ -1,5 +1,7 @@
 # nr
 
+[![CircleCI](https://circleci.com/gh/joshuarubin/nr.svg?style=svg)](https://circleci.com/gh/joshuarubin/nr)
+
 ```
 Usage of ./nr:
 

@@ -15,6 +15,7 @@ import (
 	"jrubin.io/nr/wordreader"
 )
 
+// A Sequence is a set of words and how frequently it occurs in the content
 type Sequence struct {
 	Words []string
 	Count int
@@ -74,6 +75,7 @@ func isSpace(s string) bool {
 	return false
 }
 
+// Process the content and build a list of the most frequent word sequences
 func Process(n io.Reader, seqSize, topN int) ([]*Sequence, error) {
 	if seqSize < 1 || topN < 1 {
 		return nil, fmt.Errorf("invalid argument")

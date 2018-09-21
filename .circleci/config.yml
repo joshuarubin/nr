@@ -12,4 +12,5 @@ jobs:
 
     steps:
       - checkout
-      - run: go test -race ./...
+      - run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+      - run: bash <(curl -s https://codecov.io/bash) || true

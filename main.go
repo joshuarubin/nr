@@ -10,6 +10,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 	"text/tabwriter"
 
 	"golang.org/x/net/html/charset"
@@ -83,13 +84,21 @@ func main() {
 	}
 }
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 func run(c config, args ...string) error {
 	// build a list of all the things to read from
 
-	var readers []io.Reader
+	readers := make([]io.Reader, 0, max(len(args), 1))
 	for _, fn := range args {
 		if fn == "-" {
-			readers = append(readers, os.Stdin)
+			readers = append(readers, io.MultiReader(os.Stdin, strings.NewReader(" ")))
+			continue
 		}
 
 		f, err := os.Open(fn)
@@ -97,7 +106,7 @@ func run(c config, args ...string) error {
 			return err
 		}
 		defer f.Close()
-		readers = append(readers, f)
+		readers = append(readers, io.MultiReader(f, strings.NewReader(" ")))
 	}
 
 	if len(readers) == 0 {
