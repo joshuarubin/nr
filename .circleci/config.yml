@@ -1,0 +1,15 @@
+---
+version: 2
+
+jobs:
+  build:
+    working_directory: /go/src/jrubin.io/nr
+
+    docker:
+      - image: circleci/golang:1.11
+        environment:
+          GO111MODULE: "ON"
+
+    steps:
+      - checkout
+      - run: go test -race ./...

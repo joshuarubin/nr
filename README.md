@@ -1,3 +1,6 @@
+# nr
+
+```
 Usage of ./nr:
 
 	./nr file1.txt file2.txt ...
@@ -13,3 +16,4 @@ flags:
     	only show the top n sequences with the highest frequency count (default 100)
   -sequence-size int
     	number of words per sequence (default 3)
+```
