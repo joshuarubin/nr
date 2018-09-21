@@ -1,6 +1,6 @@
 # nr
 
-[![CircleCI](https://circleci.com/gh/joshuarubin/nr.svg?style=svg)](https://circleci.com/gh/joshuarubin/nr)
+[![CircleCI](https://circleci.com/gh/joshuarubin/nr.svg?style=svg)](https://circleci.com/gh/joshuarubin/nr) [![GoDoc](https://godoc.org/jrubin.io/nr?status.svg)](https://godoc.org/jrubin.io/nr) [![Go Report Card](https://goreportcard.com/badge/jrubin.io/nr)](https://goreportcard.com/report/jrubin.io/nr) [![codecov](https://codecov.io/gh/joshuarubin/nr/branch/master/graph/badge.svg)](https://codecov.io/gh/joshuarubin/nr)
 
 ```
 Usage of ./nr:
